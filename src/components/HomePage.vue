@@ -20,7 +20,7 @@ export default {
     };
   },
   async created() {
-    const res = await fetch("http://localhost:3002/api/getPicList");
+    const res = await fetch("/api/getPicList");
     const resJson = await res.json();
     this.urls = resJson.data;
   },
