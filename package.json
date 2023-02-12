@@ -12,6 +12,8 @@
     "element-ui": "^2.15.12",
     "koa": "^2.14.1",
     "koa-router": "^12.0.0",
+    "less": "^4.1.3",
+    "less-loader": "^11.1.0",
     "vue": "^2.6.14"
   },
   "devDependencies": {
