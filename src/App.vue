@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import HomePage from "./pages/homePage/index.vue";
+import HomePage from "./pages/ToolPage/index.vue";
 
 export default {
   name: "App",
@@ -15,4 +15,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#app {
+  background: #f5f5fb;
+  height: 100vh;
+}
+body {
+  margin: 0;
+}
+</style>
