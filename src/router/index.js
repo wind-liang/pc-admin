@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomePage from "../pages/HomePage/index.vue";
+import HomePage from "../pages/PicPage/index.vue";
 import ToolPage from "../pages/ToolPage/index.vue";
 Vue.use(VueRouter);
 
