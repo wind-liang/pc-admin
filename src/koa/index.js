@@ -37,4 +37,4 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 // 监听端口
-app.listen(3002);
+app.listen(3066);
