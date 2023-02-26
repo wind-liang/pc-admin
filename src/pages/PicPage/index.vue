@@ -20,7 +20,7 @@ export default {
     };
   },
   async created() {
-    const res = await fetch("/api/getPicList");
+    const res = await fetch("http://39.108.85.104:3066/api/getPicList");
     const resJson = await res.json();
     this.urls = resJson.data;
   },
