@@ -19,10 +19,7 @@ router.get("/api/getPicList", async (ctx) => {
 });
 
 app.use(async (ctx, next) => {
-  ctx.set(
-    "Access-Control-Allow-Origin",
-    "http://localhost:8082 http://pc.windliang.wang"
-  );
+  ctx.set("Access-Control-Allow-Origin", "http://pc.windliang.wang");
   ctx.set(
     "Access-Control-Allow-Headers",
     "Content-Type, Content-Length, Authorization, Accept, X-Requested-With"
