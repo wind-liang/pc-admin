@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import HomePage from "../pages/PicPage/index.vue";
 import ToolPage from "../pages/ToolPage/index.vue";
+import LoginPage from "../pages/LoginPage/index.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -14,6 +16,11 @@ const routes = [
     path: "/tool",
     name: "tool",
     component: ToolPage,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: LoginPage,
   },
 ];
 
