@@ -4,7 +4,16 @@ const router = require("koa-router")();
 const jsonwebtoken = require("jsonwebtoken");
 const bodyParser = require("koa-bodyparser");
 
-const { secret } = require("./privateConf");
+const { secret, appId, appKey, masterKey } = require("./privateConf");
+
+const AV = require("leancloud-storage");
+AV.init({
+  appId,
+  appKey,
+  serverURL: "https://pc-api.windliang.wang",
+  masterKey,
+});
+AV.Cloud.useMasterKey(true);
 
 router.get("/api/getPicList", async (ctx) => {
   ctx.body = {
@@ -22,13 +31,15 @@ router.get("/api/getPicList", async (ctx) => {
   };
 });
 
-const userNameList = ["liang_extraordinary"];
 router.post("/api/login", async (ctx) => {
   const { body } = ctx.request;
   try {
     const { userName } = body;
     // 匹配密码是否相等
-    if (userNameList.includes(userName)) {
+    const query = new AV.Query("VipUser");
+    query.equalTo("name", userName);
+    const students = await query.find();
+    if (students.length > 0) {
       ctx.status = 200;
       ctx.body = {
         message: "登录成功",
