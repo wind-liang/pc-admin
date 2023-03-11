@@ -54,7 +54,21 @@ export default {
     };
   },
   methods: {
-    submitForm() {},
+    async submitForm() {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+        },
+
+        body: JSON.stringify({
+          userName: this.ruleForm.account,
+          password: this.ruleForm.password,
+        }),
+      });
+      const resJson = await res.json();
+      this.urls = resJson.data;
+    },
     resetForm() {},
   },
 };

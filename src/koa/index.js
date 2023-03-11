@@ -1,6 +1,10 @@
 const koa = require("koa");
 const app = new koa();
 const router = require("koa-router")();
+const jsonwebtoken = require("jsonwebtoken");
+const bodyParser = require("koa-bodyparser");
+
+const { secret } = require("./privateConf");
 
 router.get("/api/getPicList", async (ctx) => {
   ctx.body = {
@@ -17,6 +21,38 @@ router.get("/api/getPicList", async (ctx) => {
     msg: "成功",
   };
 });
+
+const userNameList = ["liang_extraordinary"];
+router.post("/api/login", async (ctx) => {
+  const { body } = ctx.request;
+  try {
+    const { userName } = body;
+    // 匹配密码是否相等
+    if (userNameList.includes(userName)) {
+      ctx.status = 200;
+      ctx.body = {
+        message: "登录成功",
+        // 生成 token 返回给客户端
+        token: jsonwebtoken.sign(
+          {
+            data: userName,
+            // 设置 token 过期时间
+            exp: Math.floor(Date.now() / 1000) + 60 * 60, // 60 seconds * 60 minutes = 1 hour
+          },
+          secret
+        ),
+      };
+    } else {
+      ctx.status = 401;
+      ctx.body = {
+        message: "密码错误",
+      };
+    }
+  } catch (error) {
+    ctx.throw(500);
+  }
+});
+app.use(bodyParser());
 
 app.use(async (ctx, next) => {
   ctx.set("Access-Control-Allow-Origin", "http://pc.windliang.wang");
