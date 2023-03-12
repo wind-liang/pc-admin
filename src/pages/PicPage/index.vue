@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { getPicList } from "./api";
 export default {
   name: "HomePage",
   props: {},
@@ -20,9 +21,8 @@ export default {
     };
   },
   async created() {
-    const res = await fetch("http://39.108.85.104:3066/api/getPicList");
-    const resJson = await res.json();
-    this.urls = resJson.data;
+    const data = await getPicList();
+    this.urls = data;
   },
 };
 </script>

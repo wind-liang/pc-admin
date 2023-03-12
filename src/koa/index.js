@@ -43,21 +43,26 @@ router.post("/api/login", async (ctx) => {
     if (students.length > 0) {
       ctx.status = 200;
       ctx.body = {
-        message: "登录成功",
-        // 生成 token 返回给客户端
-        token: jsonwebtoken.sign(
-          {
-            data: userName,
-            // 设置 token 过期时间
-            exp: Math.floor(Date.now() / 1000) + 60 * 60, // 60 seconds * 60 minutes = 1 hour
-          },
-          secret
-        ),
+        data: {
+          // 生成 token 返回给客户端
+          token: jsonwebtoken.sign(
+            {
+              data: userName,
+              // 设置 token 过期时间
+              exp: Math.floor(Date.now() / 1000) + 60 * 60, // 60 seconds * 60 minutes = 1 hour
+            },
+            secret
+          ),
+        },
+        code: 0,
+        msg: "登录成功",
       };
     } else {
       ctx.status = 401;
       ctx.body = {
-        message: "密码错误",
+        data: null,
+        code: 1,
+        msg: "密码错误",
       };
     }
   } catch (error) {
