@@ -3,6 +3,7 @@ const app = new koa();
 const router = require("koa-router")();
 const jsonwebtoken = require("jsonwebtoken");
 const bodyParser = require("koa-bodyparser");
+const koaJwt = require("koa-jwt");
 
 const { secret, appId, appKey, masterKey } = require("./privateConf");
 
@@ -78,6 +79,9 @@ app.use(async (ctx, next) => {
     await next();
   }
 });
+// 路由权限控制，除了`path`里匹配的路径，都需要验证 token
+app.use(koaJwt({ secret }).unless({ path: [/^\/api\/login/] }));
+
 // 启动路由
 app.use(router.routes());
 // 设置响应头
