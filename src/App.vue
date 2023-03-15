@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <MenuList v-if="isLogin" class="menu"></MenuList>
-    <div class="content" :style="isLogin ? '' : 'margin-left:0'">
+    <MenuList v-if="showMenu" class="menu"></MenuList>
+    <div class="content" :style="showMenu ? '' : 'margin-left:0'">
       <router-view />
     </div>
   </div>
@@ -13,10 +13,10 @@ export default {
   components: {
     MenuList,
   },
-  data() {
-    return {
-      isLogin: false,
-    };
+  computed: {
+    showMenu() {
+      return this.$route.path !== "/login";
+    },
   },
 };
 </script>
