@@ -9,13 +9,21 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "home",
+    name: "/",
     component: HomePage,
+    meta: {
+      title: "画廊",
+      icon: "el-icon-picture-outline",
+    },
   },
   {
     path: "/tool",
     name: "tool",
     component: ToolPage,
+    meta: {
+      title: "工具导航",
+      icon: "el-icon-suitcase-1",
+    },
   },
   {
     path: "/login",

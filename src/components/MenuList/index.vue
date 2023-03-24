@@ -1,17 +1,18 @@
 <template>
   <div class="container">
     <el-menu
-      default-active="/"
+      :default-active="$route.name"
       class="el-menu-vertical"
       @select="handSelect"
+      router
     >
-      <el-menu-item index="/">
-        <i class="el-icon-picture-outline"></i>
-        <span slot="title">画廊</span>
-      </el-menu-item>
-      <el-menu-item index="/tool" >
-        <i class="el-icon-suitcase-1"></i>
-        <span slot="title">工具导航</span>
+      <el-menu-item
+        v-for="item in menuItems"
+        :index="item.name"
+        :key="item.name"
+      >
+        <i :class="item.icon"></i>
+        <span slot="title">{{ item.title }}</span>
       </el-menu-item>
     </el-menu>
   </div>
@@ -21,17 +22,25 @@
 export default {
   name: "MenuList",
   props: {},
-  methods: {
-    handSelect(path) {
-        this.$router.push(path)
-    }
-  }
+  computed: {
+    menuItems() {
+      return this.$router.options.routes
+        .filter((route) => route.meta && route.meta.title)
+        .map((route) => ({
+          path: route.path,
+          name: route.name,
+          title: route.meta.title,
+          icon: route.meta.icon,
+        }));
+    },
+  },
+  methods: {},
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .el-menu-vertical {
-    height: 100vh;
+  height: 100vh;
 }
 </style>
