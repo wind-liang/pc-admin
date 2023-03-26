@@ -32,6 +32,14 @@ router.get("/api/getPicList", async (ctx) => {
   };
 });
 
+router.get("/api/getRoutes", async (ctx) => {
+  ctx.body = {
+    data: ["/", "tool"],
+    code: 0,
+    msg: "成功",
+  };
+});
+
 router.post("/api/login", async (ctx) => {
   const { body } = ctx.request;
   try {

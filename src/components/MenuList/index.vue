@@ -1,11 +1,6 @@
 <template>
   <div class="container">
-    <el-menu
-      :default-active="$route.name"
-      class="el-menu-vertical"
-      @select="handSelect"
-      router
-    >
+    <el-menu :default-active="$route.name" class="el-menu-vertical" router>
       <el-menu-item
         v-for="item in menuItems"
         :index="item.name"
@@ -22,9 +17,21 @@
 export default {
   name: "MenuList",
   props: {},
-  computed: {
-    menuItems() {
-      return this.$router.options.routes
+  watch: {
+    $route: {
+      handler() {
+        this.genreateMenus(this.$router.matcher.getRoutes());
+      },
+    },
+  },
+  data() {
+    return {
+      menuItems: [],
+    };
+  },
+  methods: {
+    genreateMenus(routes) {
+      this.menuItems = routes
         .filter((route) => route.meta && route.meta.title)
         .map((route) => ({
           path: route.path,
@@ -34,7 +41,6 @@ export default {
         }));
     },
   },
-  methods: {},
 };
 </script>
 
