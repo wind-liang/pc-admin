@@ -60,7 +60,7 @@ router.beforeEach(async (to, from, next) => {
       }
     } else {
       // 说明没有登陆，则重定向到登陆页
-      next({ name: "login" });
+      next({ name: "login", replace: true });
     }
   } else {
     next();

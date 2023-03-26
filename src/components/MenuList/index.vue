@@ -22,6 +22,7 @@ export default {
       handler() {
         this.genreateMenus(this.$router.matcher.getRoutes());
       },
+      immediate: true,
     },
   },
   data() {
